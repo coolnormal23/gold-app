@@ -10,7 +10,10 @@ export default async function serveStatic(req, res, basedir) {
 	const mimeType = mime.lookup(resourcePath);
 	console.log(`Serving ${resourcePath}, type ${mimeType}`);
 	try {
-		const payload = await fs.readFile(resourcePath, 'utf-8');
+		const payload = await fs.readFile(
+			resourcePath,
+			mimeType.startsWith('image') ? null : 'utf-8'
+		);
 		return sendResponse(res, 200, mimeType, payload);
 	} catch (e) {
 		console.log(e);
