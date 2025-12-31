@@ -1,6 +1,4 @@
-import path from 'node:path';
 import http from 'node:http';
-import sendResponse from './utils/sendResponse.js';
 import serveStatic from './utils/serveStatic.js';
 import priceAPIHandler from './utils/priceAPIHandler.js';
 

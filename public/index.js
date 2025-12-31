@@ -11,11 +11,22 @@ eventSource.onmessage = (e) => {
 	priceDisplay.innerText = price;
 };
 
-document.forms[0].addEventListener('submit', (e) => {
+document.forms[0].addEventListener('submit', async (e) => {
 	e.preventDefault();
 	if (price == -1) {
 		console.log('No price.');
 	} else {
-		console.log(`bought gold: ${document.forms[0][0].value}`);
+		const requestBody = { amount: document.forms[0][0].value, price: price };
+		console.log(JSON.stringify(requestBody));
+		try {
+			const res = await fetch('/api', {
+				method: 'POST',
+				body: JSON.stringify(requestBody),
+			});
+			const json = await res.json();
+			console.log(json);
+		} catch (e) {
+			console.log(e);
+		}
 	}
 });
