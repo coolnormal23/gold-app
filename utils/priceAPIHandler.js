@@ -66,7 +66,7 @@ export default async function priceAPIHandler(req, res) {
 					const time = dateObj.toLocaleString('en-us');
 					const price = serverPrice;
 					const amountPaid = parsedBody.amount;
-					const amountSold = price / amountPaid;
+					const amountSold = (price / amountPaid).toFixed(4);
 					const payload = JSON.stringify({
 						amount: amountPaid,
 						price: price,
